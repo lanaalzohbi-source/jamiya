@@ -1,0 +1,14 @@
+{
+  "name": "جمعية العيلة",
+  "short_name": "الجمعية",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#EEF2EF",
+  "theme_color": "#0B6E5C",
+  "icons": [
+    { "src": "icon-180.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

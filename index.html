@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>جمعية العيلة</title>
+<meta name="theme-color" content="#0B6E5C">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="الجمعية">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Reem+Kufi:wght@500;700&display=swap">
+<style>
+:root{
+  --bg:#EEF2EF; --surface:#FFFFFF; --ink:#132A26; --muted:#52645F; --line:#D5DDD9;
+  --accent:#0B6E5C; --accent-ink:#FFFFFF; --accent-soft:#DCEDE8;
+  --due:#7A4700; --due-soft:#FBEBD2; --late:#B3261E; --late-soft:#F9DEDC; --ok:#1C7A43; --ok-soft:#DBF0E1;
+  --f-display:"Reem Kufi","IBM Plex Sans Arabic",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans Arabic",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#0E1716; --surface:#152220; --ink:#E4EEEA; --muted:#9DB0AA; --line:#2A3B38;
+  --accent:#1E8C74; --accent-ink:#FFFFFF; --accent-soft:#183A33;
+  --due:#F2B45A; --due-soft:#3A2C14; --late:#FF8A80; --late-soft:#3D1D1A; --ok:#6FD49A; --ok-soft:#173826; color-scheme:dark}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6}
+.wrap{max-width:680px;margin:0 auto;padding-inline:16px;padding-block:calc(20px + env(safe-area-inset-top,0px)) calc(40px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:18px}
+h1,h2{font-family:var(--f-display);margin:0;line-height:1.25;text-wrap:balance}
+h1{font-size:1.9rem}
+h2{font-size:1.3rem}
+.sub{color:var(--muted);font-size:.85rem}
+.num{font-variant-numeric:tabular-nums}
+.note{font-size:.8rem;color:var(--due);background:var(--due-soft);border-radius:10px;padding:8px 12px}
+.hero{background:var(--accent);color:var(--accent-ink);border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:14px}
+.hero .eyebrow{font-size:.82rem;opacity:.85}
+.hero .who{font-family:var(--f-display);font-size:clamp(2rem,9vw,2.8rem);line-height:1.15}
+.facts{display:flex;flex-wrap:wrap;gap:8px 26px}
+.facts div{display:flex;flex-direction:column}
+.facts b{font-size:1.25rem}
+.facts span{font-size:.78rem;opacity:.85}
+.bar{height:10px;border-radius:99px;background:rgba(255,255,255,.25);overflow:hidden}
+.bar i{display:block;height:100%;background:#FFFFFF;border-radius:99px;transition:width .4s ease}
+.transfer{background:rgba(255,255,255,.14);border-radius:12px;padding:10px 14px;font-size:.9rem;display:flex;flex-direction:column;gap:2px;word-break:break-word}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+label.pick{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--muted)}
+select{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px 12px;min-height:44px;max-width:100%}
+select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.stat{background:var(--bg);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column}
+.stat span{font-size:.8rem;color:var(--muted)}
+.stat b{font-size:1.15rem}
+.pill{display:inline-block;font-size:.75rem;font-weight:600;padding:2px 10px;border-radius:99px;white-space:nowrap}
+.ok{background:var(--ok-soft);color:var(--ok)}
+.due{background:var(--due-soft);color:var(--due)}
+.late{background:var(--late-soft);color:var(--late)}
+.now{background:var(--accent-soft);color:var(--accent)}
+.past{background:var(--bg);color:var(--muted)}
+.turn{display:flex;flex-direction:column;background:var(--bg);border-radius:10px;padding:8px 12px}
+.turn .t{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.turn small{color:var(--muted);font-size:.82rem}
+.sched{display:flex;flex-direction:column;margin-inline:-18px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 18px;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+.row.cur{background:var(--accent-soft)}
+.row.mine .nm{text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:2px;text-underline-offset:4px}
+.row .l{display:flex;gap:12px;align-items:center;min-width:0}
+.row .i{color:var(--muted);width:20px;flex:none}
+.row .d{display:flex;flex-direction:column;min-width:0}
+.row .d small{font-size:.78rem;color:var(--muted)}
+.muted{color:var(--muted);font-size:.82rem;margin:0}
+.empty{text-align:center;color:var(--muted);padding:40px 16px}
+footer{text-align:center;color:var(--muted);font-size:.78rem}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+</style>
+</head>
+<body>
+<main class="wrap" id="app">
+  <header>
+    <h1 id="title">جمعية العيلة</h1>
+    <div class="sub" id="subtitle">جاري التحميل…</div>
+  </header>
+  <div id="content"><div class="empty">جاري تحميل بيانات الجمعية…</div></div>
+  <footer id="foot"></footer>
+</main>
+
+<script>
+(function(){
+  "use strict";
+  var D = null;
+  var $ = function(id){ return document.getElementById(id); };
+  function esc(s){ return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+  function lsGet(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+  function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+
+  function money(n){ return (Math.round(n*100)/100).toLocaleString("en-US") + " " + (D.currency || ""); }
+  function startParts(){ var p = String(D.start || "2026-01").split("-").map(Number); return {y:p[0], m:p[1]-1}; }
+  function monthLabel(i){ var s = startParts(); return new Date(s.y, s.m + i, 1).toLocaleDateString("ar-JO-u-nu-latn", {month:"long", year:"numeric"}); }
+  function currentIndex(){ var s = startParts(), n = new Date(); return (n.getFullYear()-s.y)*12 + (n.getMonth()-s.m); }
+  function shareText(x){
+    if(!x) return "بلا أسهم";
+    var w = Math.floor(x), h = (x - w) >= 0.5;
+    var base = w === 0 ? "" : w === 1 ? "سهم" : w === 2 ? "سهمين" : w + " أسهم";
+    if(h) return w === 0 ? "نص سهم" : base + " ونص";
+    return base;
+  }
+  function member(name){ for(var i=0;i<D.members.length;i++) if(D.members[i].name === name) return D.members[i]; return null; }
+  function paidList(i){ return (D.paid && D.paid[String(i+1)]) || []; }
+  function isPaid(i, name){ return paidList(i).indexOf(name) >= 0; }
+  function turnAt(i){ return (D.turns && D.turns[i]) || []; }
+  function pot(){ return (+D.perShare||0) * (+D.months||0); }
+  function collected(i){ return D.members.reduce(function(a,m){ return a + (isPaid(i,m.name) ? m.shares * D.perShare : 0); }, 0); }
+  function paidCount(i){ return D.members.filter(function(m){ return isPaid(i,m.name); }).length; }
+  function joinNames(arr){ return arr.length ? arr.join(" و") : "لسا ما تحدد"; }
+
+  function render(){
+    var N = +D.months || 0, cur = currentIndex();
+    document.title = D.name || "جمعية العيلة";
+    $("title").textContent = D.name || "جمعية العيلة";
+    $("subtitle").textContent = N ? (N + " شهر · من " + monthLabel(0) + " إلى " + monthLabel(N-1) + " · الدفع يوم " + (D.payDay||1) + " من كل شهر") : "";
+    var html = "";
+    if(D.sample) html += '<div class="note">هاي بيانات تجريبية للتجربة بس.</div>';
+    html += heroHtml(N, cur) + meHtml(N, cur) + scheduleHtml(N, cur);
+    $("content").innerHTML = '<div style="display:flex;flex-direction:column;gap:18px">' + html + '</div>';
+    var sel = $("mePick");
+    if(sel) sel.onchange = function(){ lsSet("jamiya-me", sel.value); render(); };
+    $("foot").textContent = D.updated ? ("آخر تحديث: " + D.updated) : "";
+  }
+
+  function heroHtml(N, cur){
+    if(!N) return "";
+    if(cur < 0){
+      return '<section class="hero"><div class="eyebrow">الجمعية بتبلّش ' + esc(monthLabel(0)) + '</div><div class="who">أول دور: ' + esc(joinNames(turnAt(0))) + '</div>'
+        + '<div class="facts"><div><b class="num">' + money(pot()) + '</b><span>مبلغ القبضة</span></div><div><b class="num">' + money(D.perShare) + '</b><span>دفعة السهم الشهرية</span></div></div></section>';
+    }
+    if(cur >= N){
+      return '<section class="hero"><div class="eyebrow">انتهت الجمعية</div><div class="who">كل الأدوار اكتملت</div><div>آخر دور كان ' + esc(monthLabel(N-1)) + '.</div></section>';
+    }
+    var rec = turnAt(cur), got = collected(cur), p = pot(), pct = p ? Math.min(100, Math.round(got/p*100)) : 0;
+    var note = rec.length > 1 ? ("سهم مشترك: كل واحد بيقبض " + money(p/rec.length) + ". حوّلوا قبل يوم " + (D.payDay||1) + ".") : ("حوّلوا الدفعة قبل يوم " + (D.payDay||1) + " من الشهر");
+    var tr = rec.map(function(n){ var m = member(n); return '<span><b>' + esc(n) + ':</b> ' + esc(m && m.transfer ? m.transfer : "اسألوا المسؤولة") + '</span>'; }).join("");
+    return '<section class="hero" aria-live="polite">'
+      + '<div class="eyebrow">دور ' + esc(monthLabel(cur)) + ' · الشهر ' + (cur+1) + ' من ' + N + '</div>'
+      + '<div class="who">' + esc(joinNames(rec)) + '</div>'
+      + '<div>' + esc(note) + '</div>'
+      + (rec.length ? '<div class="transfer"><span style="opacity:.85">معلومات التحويل</span>' + tr + '</div>' : '')
+      + '<div class="facts"><div><b class="num">' + money(p) + '</b><span>مبلغ القبضة</span></div>'
+      + '<div><b class="num">' + money(got) + '</b><span>انجمع لهلأ</span></div>'
+      + '<div><b class="num">' + paidCount(cur) + ' / ' + D.members.length + '</b><span>دفعوا هالشهر</span></div></div>'
+      + '<div class="bar" role="progressbar" aria-label="نسبة المبلغ المجموع" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + pct + '"><i style="width:' + pct + '%"></i></div>'
+      + '</section>';
+  }
+
+  function meHtml(N, cur){
+    if(!D.members.length) return "";
+    var pick = lsGet("jamiya-me"); if(!member(pick)) pick = "";
+    var opts = '<option value="">— اختار اسمك —</option>' + D.members.map(function(m){ return '<option value="' + esc(m.name) + '"' + (m.name === pick ? " selected" : "") + '>' + esc(m.name) + '</option>'; }).join("");
+    var body = '<p class="muted">اختار اسمك لتشوف كم دفعت وكم ضايل عليك ومتى دورك.</p>';
+    var m = member(pick);
+    if(m && N){
+      var monthly = m.shares * D.perShare, total = monthly * N, paid = 0, late = 0;
+      for(var i=0;i<N;i++){ if(isPaid(i, m.name)) paid += monthly; else if(i < cur) late++; }
+      var badges = "";
+      if(cur >= 0 && cur < N) badges += isPaid(cur, m.name) ? '<span class="pill ok">دفعت هالشهر</span>' : '<span class="pill due">ما دفعت هالشهر لسا</span>';
+      if(late) badges += ' <span class="pill late">متأخر ' + late + ' ' + (late === 1 ? "شهر" : "أشهر") + '</span>';
+      var turns = "";
+      for(var j=0;j<N;j++){
+        var t = turnAt(j); if(t.indexOf(m.name) < 0) continue;
+        var partners = t.filter(function(x){ return x !== m.name; });
+        var st = j < cur ? '<span class="pill past">قبضت</span>' : j === cur ? '<span class="pill now">دورك هالشهر</span>' : (cur >= 0 ? '<span class="pill past">بعد ' + (j-cur) + ' شهر</span>' : '');
+        var detail = partners.length ? ("سهم مشترك مع " + partners.join(" و") + " · بتقبض " + money(pot()/t.length)) : ("بتقبض " + money(pot()));
+        turns += '<div class="turn"><div class="t"><b>' + esc(monthLabel(j)) + '</b>' + st + '</div><small>' + esc(detail) + '</small></div>';
+      }
+      body = (badges ? '<div>' + badges + '</div>' : '')
+        + '<div class="stats">'
+        + '<div class="stat"><span>حصتك</span><b>' + esc(shareText(m.shares)) + '</b></div>'
+        + '<div class="stat"><span>دفعتك الشهرية</span><b class="num">' + money(monthly) + '</b></div>'
+        + '<div class="stat"><span>دفعت لهلأ</span><b class="num">' + money(paid) + '</b></div>'
+        + '<div class="stat"><span>ضايل عليك</span><b class="num">' + money(total - paid) + '</b></div>'
+        + '</div>'
+        + '<div style="display:flex;flex-direction:column;gap:8px"><p class="muted">أدوارك بالجمعية</p>' + (turns || '<p class="muted">لسا ما تحدد دورك.</p>') + '</div>'
+        + '<p class="muted">باقي من مدة الجمعية: ' + Math.max(0, N - Math.max(cur, 0)) + ' شهر من أصل ' + N + '</p>';
+    }
+    return '<section class="card"><div class="head"><h2>وضعي بالجمعية</h2><label class="pick" for="mePick">اسمك<select id="mePick">' + opts + '</select></label></div>' + body + '</section>';
+  }
+
+  function scheduleHtml(N, cur){
+    if(!N) return "";
+    var me = lsGet("jamiya-me"), rows = "";
+    for(var i=0;i<N;i++){
+      var t = turnAt(i);
+      var st = i < cur ? '<span class="pill past">انتهى</span>' : i === cur ? '<span class="pill now">الشهر الحالي</span>' : '<span class="pill past">قادم</span>';
+      var pc = (i <= cur && cur >= 0) ? (paidCount(i) + "/" + D.members.length) : "—";
+      rows += '<div class="row' + (i === cur ? " cur" : "") + (t.indexOf(me) >= 0 ? " mine" : "") + '"><div class="l"><span class="i num">' + (i+1) + '</span><div class="d"><b class="nm">' + esc(joinNames(t)) + '</b><small>' + esc(monthLabel(i)) + ' · دفعوا ' + pc + '</small></div></div>' + st + '</div>';
+    }
+    return '<section class="card"><h2>جدول الأدوار</h2><div class="sched">' + rows + '</div><p class="muted">كل سهم = دور واحد. اللي عنده سهمين بياخد دورين، واللي متشاركين بسهم بيتقاسموا القبضة.</p></section>';
+  }
+
+  fetch("data.json?v=" + Date.now(), {cache:"no-store"})
+    .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function(d){
+      D = d; D.members = D.members || []; D.turns = D.turns || []; D.paid = D.paid || {};
+      render();
+    })
+    .catch(function(){
+      $("subtitle").textContent = "";
+      $("content").innerHTML = '<div class="empty">ما قدرنا نحمّل بيانات الجمعية. تأكدوا من النت وحدّثوا الصفحة.</div>';
+    });
+  document.addEventListener("visibilitychange", function(){
+    if(document.visibilityState === "visible" && D){
+      fetch("data.json?v=" + Date.now(), {cache:"no-store"}).then(function(r){ return r.ok ? r.json() : null; }).then(function(d){ if(d){ D = d; D.members = D.members || []; D.turns = D.turns || []; D.paid = D.paid || {}; render(); } }).catch(function(){});
+    }
+  });
+})();
+</script>
+</body>
+</html>
